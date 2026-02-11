@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import './App.css';
 import {Button} from "./components/ui/button";
+import { useInvoiceStore } from "./store/useUserStore"
 
 function App() {
-  const [count, setCount] = useState(123)
+   const { invoices, loading, loadInvoice } = useInvoiceStore();
+
+   useEffect(() => {
+    loadInvoice();
+  }, [loadInvoice]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <>
@@ -13,7 +20,13 @@ function App() {
         Hello world!
       </h1>
       {/* ... other components */}
-      <div>{count}</div>
+      <ul>
+      {invoices.map((l: any) => (
+        <li key={l.id}>
+          {l.invoiceNumber} — {l.terms}
+        </li>
+      ))}
+      </ul>
       <Button />
     </div>
     </>
