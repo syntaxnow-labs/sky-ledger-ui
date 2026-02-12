@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { fetchLedgers, type Invoice } from '../api/invoice.api';
+import { fetchInvoice, type Invoice } from '../api/invoice';
 interface InvoiceState {
   invoices: Invoice[];
   loading: boolean;
@@ -15,7 +15,7 @@ export const useInvoiceStore = create<InvoiceState>((set) => ({
   loadInvoice: async () => {
     set({ loading: true, error: undefined });
     try {
-      const data = await fetchLedgers();
+      const data = await fetchInvoice();
       set({ invoices: data, loading: false });
     } catch (e: any) {
       set({ error: e.message, loading: false });

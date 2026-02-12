@@ -7,7 +7,6 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-COPY yarn.lock ./
 
 # Install deps
 RUN corepack enable && yarn install --frozen-lockfile

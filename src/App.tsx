@@ -1,10 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import {Button} from "./components/ui/button";
-import { useInvoiceStore } from "./store/useUserStore"
+import { useInvoiceStore } from "./store/useUserStore";
+import { useAuthStore } from './store/useAuthStore';
+import DashboardLayout from "./layout/DashboardLayout";
+import LoginPage from './pages/LoginPage';
 
 function App() {
-   const { invoices, loading, loadInvoice } = useInvoiceStore();
+    const { token } = useAuthStore();
+    const isAuthenticated = !!token;
+
+   const { loading, loadInvoice } = useInvoiceStore();
 
    useEffect(() => {
     loadInvoice();
@@ -13,23 +19,39 @@ function App() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <>
-       <div className="App bg-sky-50  border-pink-300">
-      {/* Add these classes for testing */}
-      <h1 className="text-3xl font-bold underline text-center p-4">
-        Hello world!
-      </h1>
-      {/* ... other components */}
-      <ul>
-      {invoices.map((l: any) => (
-        <li key={l.id}>
-          {l.invoiceNumber} — {l.terms}
-        </li>
-      ))}
-      </ul>
-      <Button />
-    </div>
-    </>
+   
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={isAuthenticated ? (
+            <Navigate to="/dashboard" replace />
+          ) : (
+            <Navigate to="/login" replace />
+          )} />
+
+      <Route path="/login" element={<LoginPage />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          isAuthenticated ? (
+            <DashboardLayout />
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
+      >
+        <Route index element={<div>Dashboard Home</div>} />
+        <Route path="quotations" element={<div>Quotations</div>} />
+        <Route path="invoices" element={<div>Invoices</div>} />
+        <Route path="credit-notes" element={<div>Credit Notes</div>} />
+        <Route path="catalog" element={<div>Catalog</div>} />
+        <Route path="inventory" element={<div>Inventory</div>} />
+        <Route path="clients" element={<div>Clients</div>} />
+        <Route path="expenses" element={<div>Expenses</div>} />
+        <Route path="settings" element={<div>Settings</div>} />
+      </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
