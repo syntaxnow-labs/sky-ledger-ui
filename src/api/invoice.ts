@@ -6,7 +6,7 @@ export interface Invoice {
   balance: number;
 }
 
-export const fetchLedgers = async (): Promise<Invoice[]> => {
+export const fetchInvoice = async (): Promise<Invoice[]> => {
   const res = await axiosInstance.get('/invoices');
   return res.data;
 };
