@@ -14,8 +14,8 @@ const UserProfile = () => {
 
       <DropdownMenuTrigger asChild>
         <button className="rounded-full focus:outline-none">
-        <Avatar className="h-8 w-8 bg-[#1E88E5]">
-       <AvatarFallback className="bg-[#1E88E5]text-[#d1d5db]font-bold transition-colors duration-200 hover:text-[#D4AF37] ">
+        <Avatar className="h-8 w-8 bg-[#e9edf1]">
+       <AvatarFallback className="bg-[#1E88E5]text-[#d1d5db]font-bold transition-colors duration-200 hover:text-[#f8f4e5] ">
           {user.name.charAt(0)}
         </AvatarFallback>
           </Avatar>
@@ -23,17 +23,17 @@ const UserProfile = () => {
       </DropdownMenuTrigger>
 
      
-      <DropdownMenuContent align="end" className="w-80 p-4 space-y-3 bg-[#D4AF37]">
+      <DropdownMenuContent align="end" className="w-80 p-4 space-y-3 bg-[#f4f5f8]">
         
         <div className="text-xs font-medium text-[#161616]">
           Managed account
         </div>
 
-        <div className="rounded-lg border border-[#1E88E5] bg-[#f1f3f5] p-3 flex items-start gap-3">
+        <div className="rounded-lg border border-[#58218b] bg-[#f1f3f5] p-3 flex items-start gap-3">
          
-          <Avatar className="h-10 w-10 bg-[#1E88E5]">
+          <Avatar className="h-10 w-10 bg-[#dbbebe]">
             <AvatarFallback
-              className=" bg-[#1E88E5]text-[#d1d5db] font-bold transition-colors duration-200 hover:text-[#D4AF37]">
+              className=" bg-[#1E88E5]text-[#d1d5db] font-bold transition-colors duration-200 hover:text-[#f1ebeb]">
               {user.name.charAt(0)}
             </AvatarFallback>
           </Avatar>
